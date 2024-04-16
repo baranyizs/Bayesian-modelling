@@ -1,0 +1,14 @@
+var handHasAce = flip();
+var handHasKing = flip();
+
+var inclusiveOrResult = handHasAce || handHasKing;
+
+var exclusiveOrResult = (handHasAce || handHasKing) && !(handHasAce && handHasKing);
+
+var xorResult = handHasAce !== handHasKing;
+
+console.log("Hand has Ace: " + handHasAce);
+console.log("Hand has King: " + handHasKing);
+console.log("Inclusive Or Result: " + inclusiveOrResult);
+console.log("Exclusive Or Result: " + exclusiveOrResult);
+console.log("XOR Result: " + xorResult);
