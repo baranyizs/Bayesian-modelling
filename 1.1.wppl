@@ -15,8 +15,10 @@ var ComplexModel1 = function() {
     var word3 = uniformDraw(feature2)
     print('Konklúzió: Panni ' + word3 + '.'); 
   
+    print(flip(dyslexiaProbability));
+  
     var ervenyes = (op == ' és ')
-                   ? ((word2 == word3 && dyslexiaProbability) ? 'érvényes' : 'nem érvényes') 
+                   ? ((word2 == word3 && flip(dyslexiaProbability)) ? 'érvényes' : 'nem érvényes') 
                    : 'nem érvényes'
     print(ervenyes); 
     return ervenyes
