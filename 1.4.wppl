@@ -1,12 +1,24 @@
+// 1.4 (King-Ace Paradox, bemelegítő) Tudjuk, hogy a klasszikus logikában a "Ha ász van a kezemben, akkor király van, vagy ha nincs ász a kezemben, akkor király van a kezemben" 
+// mondatból nem következik feltétlenül, hogy király van a kezemben (miért?), sőt, ha a mondatban szereplő "vagy"-ot kizáró vagy értelemében használjuk, 
+// akkor kifejezetten az következik belőle, hogy nincs király a kezemben. Írj programot, ami a helyzetet modellezi úgy, 
+// hogy a mondatbeli "vagy" jelentése néha "és" néha "vagy" néha "kizáró vagy". 
+// Vö.: The Cambridge Handbook of Computational Psychology, ed.: Ron Sun, 2008, Cambrigde, p. 137.
+
+// Változó bevezetése, ász van a kézben- true vagy false és király van a kézben- true vagy false a flip függvénnyel
 var handHasAce = flip();
 var handHasKing = flip();
 
+// Bevezetjük a matematikai vagy-ot, amely változó lesz az eredmény
 var inclusiveOrResult = handHasAce || handHasKing;
 
+// Bevezetjük a kizáró vagy-ot, amikor nem lehet mindkettő igaz, csak vagy az egyik állításrész, vagy csak a másik
 var exclusiveOrResult = (handHasAce || handHasKing) && !(handHasAce && handHasKing);
 
+// Bevezetjük az és operátor, amely változó lesz az és eredménye
 var AndResult = handHasAce && handHasKing;
 
+// Ezek a sorok kiírják a az alapfeltételeket, és azoknak az igazságtartalmát flip függvénnyel, majd a vagy, kizáró vagy és az és
+// címszavakat, és kiértékelt eredményüket
 console.log("Hand has Ace: " + handHasAce);
 console.log("Hand has King: " + handHasKing);
 console.log("Inclusive Or Result: " + inclusiveOrResult);
