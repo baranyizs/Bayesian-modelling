@@ -1,22 +1,33 @@
+// 1.1 Írj következtetésre olyan ComplexModel1-et, ami ilyen premisszákat generál véletlenszerűen: Panni "könyvtáros/tanár" "és/vagy" "csendes/cserfes" és 
+// ebből logikailag helyesen következtetne olyan konklúzióra, hogy "Panni csendes/cserfes", DE! sajnos diszlexiás az ágens és a "csendes/cserfes"-t valamilyen valószínűséggel felcseréli.7
+
+// Változók bevezetése, foglalkozás, tulajdonság és az operátorok. 
 var feature1 = ['könyvtáros','tanár'];
 var feature2 = ['csendes','cserfes'];
 var operator = [' és ',' vagy '];
 
+// Egy valamilyen random valószínűség megadása a Math.random függvény segítségével, amit ki is ír a függvény, ez egy random generált 0 és 1 közötti szám
 var dyslexiaProbability = Math.random();
 print(dyslexiaProbability);
 
+// Modell alkotás, ahol a függvény a foglalkozások, a tulajdonságok és az operátorok közül választ egyet
 var ComplexModel1 = function() {
     var word1 = uniformDraw(feature1)
     var op = uniformDraw(operator)
     var word2  = uniformDraw(feature2)
     
+    // Kinyomtatja a mondatot a random kiválasztott változókkal
     print('Premissza: Panni ' + word1 + op + word2 + '.');
   
+    // Választ a függvéby egy harmadik szót, ami szintén egy tulajdonság, majd ez a mondat is megjelenik
     var word3 = uniformDraw(feature2)
     print('Konklúzió: Panni ' + word3 + '.'); 
   
+    // Kiirja a random valószínűségű dislexia igazságtartalmát, hogy diszlexiás vagy sem, true vagy false
     print(flip(dyslexiaProbability));
   
+    // Ha és az operátor, akkor attól függően, hogy a két tulajdonság megegyezik, adja meg érvényesnek az állítást, ellenkező esetben viszont nem érvényesnek
+    // Abban az esetben, ha vagy az operátor, akkor szintén nem érvényes az állítás, és ezt ki is írja
     var ervenyes = (op == ' és ')
                    ? ((word2 == word3 && flip(dyslexiaProbability)) ? 'érvényes' : 'nem érvényes') 
                    : 'nem érvényes'
