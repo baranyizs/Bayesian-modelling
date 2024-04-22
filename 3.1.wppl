@@ -1,0 +1,22 @@
+// 3.1 Írj programot, amelyik kiszámolja, hogy mi annak a valószínűsége,
+// hogy 52 lapos francia kártyából 2 kártyát választva az egyik király, a másik nem király!
+
+var model = function() {
+
+  // Első húzás esetén 52 lapból összesen 4 király, ezért király húzásának valószínűsége 4/52, ezt K1 változóként vezetjük be, és a flip függyvény dönti el, véletlenszerűen, 
+  // hogy elsőre királyt húzunk vagy sem.
+  var K1 = flip(4/52);
+
+  // Második húzás esetén két esetünk van:
+  // ha először királyt húzunk, akkor második húzásra nem királyt kell húznunk, amelynél a kedvező esetek száma: 48, az összes megmaradó 51 lapból
+  // vagy ha először nem király, majd utána királyt húzunk, amelynél kedvező esetek száma: 4, az összes megmaradó 51 lapból.
+  // a változó esetén el kell döntenünk, hogy az az első király volt, vagy nem
+  var NK2 = K1 ? flip(48/51) : flip(4/51);
+
+  // Ez lenyegében annak a valószínűsége, hogy az első húzás király és a második nem király, vagy fordítva.
+  // Tehát a két esemény együttvéve. Így ezt adjuk vissza.
+  return {NK2}
+}
+var eloszlás = Enumerate(model);
+
+viz.auto(eloszlás);
