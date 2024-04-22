@@ -1,24 +1,37 @@
+// 1.2 Írj következtetésre olyan ComplexModel2-t, ami ilyen premisszákat tartalmaz: Panni "könyvtáros/tanár" "és/vagy" "csendes/cserfes" és 
+// ebből logikailag helyesen következtetne olyan konklúzióra, hogy "Panni csendes/cserfes" ill. "Panni könyvtáros/tanár", DE! az "és"-t 95%-ban 
+// a klasszikus logikának megfelelően használja, de elég gyakran, 80%-os valószínűséggel néha a vagy-ot és-nek olvassa. 
+// Vö.: "Jaj! valami ördög... vagy ha nem, hát... kis nyúl!".
+
+// Változók bevezetése, foglalkozás, tulajdonság és az operátor. 
 var feature1 = ['könyvtáros','tanár'];
 var feature2 = ['csendes','cserfes'];
 var operator = [' és ',' vagy '];
 
 var andReadAsAndProb = 0.95;
-var orReadAsOrProb = 0.2;
+var orReadAsAndProb = 0.8;
 
+// Modell alkotás, ahol a függvény a foglalkozások, a tulajdonságok és az operátorok közül választ egyet
  var ComplexModel2 = function() {
     var word1 = uniformDraw(feature1)
     var op = uniformDraw(operator)
     var word2  = uniformDraw(feature2)
     
+    // Kiirja a mondatot a random kiválasztott változókkal
     print('Premissza: Panni ' + word1 + op + word2 + '.');
   
+    // Választ a függvény egy harmadik szót, ami szintén egy tulajdonság, majd ez a mondat is megjelenik
     var word3 = uniformDraw(feature2)
     print('Konklúzió: Panni ' + word3 + '.'); 
   
+    // Kiírja a valószínűséget, amelyen az és-t és-nek olvassa(0.95), és a vagy-ot pedig és-nek (0.2, vagy-ot 0.8 valószínűséggel és-nek olvassa)
     print(flip(andReadAsAndProb));
-    print(flip(orReadAsOrProb));
+    print(flip(orReadAsAndProb));
 
-    var ervenyes = (op == ' és ' && flip(andReadAsAndProb) ||  op == ' vagy ' && flip(orReadAsOrProb))
+    // Ha és az operátor, akkor attól függően, hogy a két tulajdonság megegyezik, adja meg érvényesnek az állítást, ellenkező esetben viszont nem érvényesnek (a vagy esetében)
+    // It az és operátornál még a csere valószínűségét is meg kell adnunk (akkor van és, ha vagy és-t és-nek olvas (0.95), vagy a vagy-ot és-nek (0.8)), 
+    // a vagy esetében nem érvényes az állítás, és ezt ki is írja
+    var ervenyes = (op == ' és ' && flip(andReadAsAndProb) ||  op == ' vagy ' && flip(orReadAsAndProb))
                     ? ((word2 == word3) ? 'érvényes' : 'nem érvényes') 
                     : 'nem érvényes'
 
