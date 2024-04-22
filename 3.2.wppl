@@ -1,0 +1,22 @@
+// 3.2 Legyen az X Y és Z valószínűség változó olyan, ami az {0, 1, 2, 3} számok közül választ
+//egyenletes valószínűséggel. Legyen W = X + Y + Z, mi az X változó eloszlása, ha tudjuk, hogy W = 7? (Írj programot!)
+
+  // Model bevezetése, ahol X, Y, Z változók egyező valószínűséggel
+  // választ a {0, 1, 2, 3} számok közül.
+  var model = function() {
+    var X = uniformDraw([0, 1, 2, 3]);
+    var Y = uniformDraw([0, 1, 2, 3]);
+    var Z = uniformDraw([0, 1, 2, 3]);
+
+  // Bevezetjük a W változót, amely ezen 4 szám összege, és egy feltételt,
+  // hogy W legyen = 7-tel.
+    var W = X + Y + Z;
+    condition(W == 7);
+
+  // Mivel az X eloszlására vagyunk kíváncsiak, visszahívjuk az X-et, majd az összes
+  // esetet figyelembe véve vizualizáljuk az X gyakoriságainak valószínűségét.
+    return {X}
+  }
+var eloszlás = Enumerate(model);
+
+viz.auto(eloszlás);
