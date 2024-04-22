@@ -1,7 +1,7 @@
 // 1.1 Írj következtetésre olyan ComplexModel1-et, ami ilyen premisszákat generál véletlenszerűen: Panni "könyvtáros/tanár" "és/vagy" "csendes/cserfes" és 
 // ebből logikailag helyesen következtetne olyan konklúzióra, hogy "Panni csendes/cserfes", DE! sajnos diszlexiás az ágens és a "csendes/cserfes"-t valamilyen valószínűséggel felcseréli.7
 
-// Változók bevezetése, foglalkozás, tulajdonság és az operátorok. 
+// Változók bevezetése, foglalkozás, tulajdonság és az operátor. 
 var feature1 = ['könyvtáros','tanár'];
 var feature2 = ['csendes','cserfes'];
 var operator = [' és ',' vagy '];
@@ -16,7 +16,7 @@ var ComplexModel1 = function() {
     var op = uniformDraw(operator)
     var word2  = uniformDraw(feature2)
     
-    // Kinyomtatja a mondatot a random kiválasztott változókkal
+    // Kiírja a mondatot a random kiválasztott változókkal
     print('Premissza: Panni ' + word1 + op + word2 + '.');
   
     // Választ a függvéby egy harmadik szót, ami szintén egy tulajdonság, majd ez a mondat is megjelenik
