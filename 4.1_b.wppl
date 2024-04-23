@@ -1,0 +1,35 @@
+// 4.1 Francia kártyapakliból kiválogatjuk a figurásokat (bubi, dáma, király, ász). Ez 16 lap. Kihúzunk visszatevés nélkül belőlük két lapot. 
+// Az alábbi program azokat az eseteket sorolja fel, amikor teljesül az A = "az egyik lap nem kőr vagy a másik lap nem király" esemény. 
+// Ezt tekintsük úgy, mint egy olyan P(X,Y) joint eloszlást, ahol a lyukas helyekhez tartozó valószínűség nulla, a többihez egyenletes.
+// b) Számoljuk ki a P( X = treff király vagy X = treff ász | Y = pikk dáma ) feltételes valószínűséget!
+
+// A színek megadása (1: káró, 2: kőr, 3: pikk, 4: treff) randomInteger választás 0-3 között, a +1 miatt 1 és 4 közötti random választás
+// A figurás lapok megadása (1: bubi, 2: dáma, 3: király, 4: ász)  randomInteger választás 0-3 között, a +1 miatt 1 és 4 közötti random választás
+// Mivel két lap húzása történik, ezért a szín2 és figura2 változókat is bevezetjük, majd a húzás1 és húzás2 két fenti váltoóból álló rendezett pár
+var kartya = function () {
+  var szin1 = randomInteger(4) + 1;
+  var figura1 = randomInteger(4) + 1;
+  var szin2 = randomInteger(4) + 1; 
+  var figura2 = randomInteger(4) + 1; 
+  var huzas1 = [szin1, figura1];
+  var huzas2 = [szin2, figura2];
+
+  // Az első feltétel a visszatevés nélküli húzásból adódik, nem lehet kétszer ugyanazt a lapot húzni.
+  // nem lehet a szín és a figura is egyidejűleg megegyező a két húzásra
+  // "az egyik lap nem kőr vagy a másik lap nem király" egyik lapnál és a másik lapnál teljesül
+  condition(!(szin1 == szin2 && figura1 == figura2) && 
+            (!(szin1 == 2) || !(figura2 == 3)) &&
+            (!(szin2 == 2) || !(figura1 == 3)));
+  
+  // Y, a második húzás feltételének megadása: - második húzás az pikk dama
+  condition(szin2 == 3 && figura2 == 2);
+
+  // Az első húzást csak akkor tekinti igaznak, ha az első kártya treff király vagy treff, a fenti feltételek mellett
+  // treff király vagy treff ász, más esetben hamisat kapunk.
+  return (szin1 == 4 && (figura1 ==3 || figura1 ==4));
+};
+
+// Az Infer függvény segítségével a feltételes valószínűséget enumerációval számoljuk ki, majd kiírja a print, és vizualizája az igaz, hamis értékek valószínűségeit.
+var conditionalProbability = Infer({ method: 'enumerate', model: kartya });
+print(conditionalProbability);
+viz.auto(conditionalProbability);
